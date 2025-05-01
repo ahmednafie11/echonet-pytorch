@@ -48,9 +48,9 @@ class Echo(torch.utils.data.Dataset):
         if split == "train":
             self.transform = transforms.Compose([
                 transforms.ToPILImage(),
-                transforms.RandomHorizontalFlip(p=0.5),  # 50% chance of horizontal flip
-                transforms.RandomRotation(degrees=15),    # Random rotation ±15 degrees
-                transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # Slight translation
+                transforms.RandomHorizontalFlip(p=0.5),
+                transforms.RandomRotation(degrees=15),
+                transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),
                 transforms.ToTensor(),
                 transforms.Normalize(mean=[self.mean], std=[self.std])  # Normalize with dataset mean/std
             ])
