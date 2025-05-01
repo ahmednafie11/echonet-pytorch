@@ -7,7 +7,8 @@ from torchvision.models.video import r2plus1d_18
 
 def train():
     # Load dataset
-    dataset = echonet.datasets.Echo(root="data", split="train")
+    dataset = echonet.datasets.Echo(root="~/cardio-echo/data", 
+split="train")
     dataloader = DataLoader(dataset, batch_size=4, shuffle=True, 
 num_workers=4)
 
