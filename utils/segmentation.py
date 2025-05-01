@@ -3,19 +3,20 @@
 import math
 import os
 import time
-
 import click
 import matplotlib.pyplot as plt
 import numpy as np
-def smooth_predictions(predictions, window_size=5):
-    return np.convolve(predictions, 
-np.ones(window_size)/window_size, mode='valid')import scipy.signal
+import scipy.signal
 import skimage.draw
 import torch
 import torchvision
 import tqdm
-
 import echonet
+
+def smooth_predictions(predictions, window_size=5):
+    """Smooth predictions using a moving average."""
+    return np.convolve(predictions, np.ones(window_size)/window_size, 
+mode='valid')
 
 
 @click.command("segmentation")
