@@ -7,10 +7,8 @@ from torchvision.models.video import r2plus1d_18
 
 def train():
     # Load dataset
-    dataset = echonet.datasets.Echo(root="~/cardio-echo/data", 
-split="train")
-    dataloader = DataLoader(dataset, batch_size=4, shuffle=True, 
-num_workers=4)
+    dataset = echonet.datasets.Echo(root="~/cardio-echo/data", split="train")
+    dataloader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=4)
 
     # Load model
     model = r2plus1d_18(pretrained=True)
@@ -25,10 +23,8 @@ num_workers=4)
     for epoch in range(10):
         model.train()
         for batch in dataloader:
-            frames = batch["frame"].cuda() if torch.cuda.is_available() 
-else batch["frame"]
-            ef = batch["ef"].cuda() if torch.cuda.is_available() else 
-batch["ef"]
+            frames = batch["frame"].cuda() if torch.cuda.is_available() else batch["frame"]
+            ef = batch["ef"].cuda() if torch.cuda.is_available() else batch["ef"]
             optimizer.zero_grad()
             output = model(frames).squeeze()
             loss = criterion(output, ef)
