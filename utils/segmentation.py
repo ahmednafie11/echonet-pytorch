@@ -110,8 +110,16 @@ def run(
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    from torchvision.models.segmentation import deeplabv3_resnet50, DeepLabV3_ResNet50_Weights, deeplabv3_resnet101, DeepLabV3_ResNet101_Weights, fcn_resnet50, FCN_ResNet50_Weights, fcn_resnet101, FCN_ResNet101_Weights
+
     # Set up model
-    model = torchvision.models.segmentation.__dict__[model_name](pretrained=pretrained, aux_loss=False)
+    weights_map = {
+        "deeplabv3_resnet50": DeepLabV3_ResNet50_Weights.DEFAULT,
+        "deeplabv3_resnet101": DeepLabV3_ResNet101_Weights.DEFAULT,
+        "fcn_resnet50": FCN_ResNet50_Weights.DEFAULT,
+        "fcn_resnet101": FCN_ResNet101_Weights.DEFAULT
+    }
+    model = torchvision.models.segmentation.__dict__[model_name](weights=weights_map[model_name] if pretrained else None, aux_loss=False)
 
     model.classifier[-1] = torch.nn.Conv2d(model.classifier[-1].in_channels, 1, kernel_size=model.classifier[-1].kernel_size)  # change number of outputs to 1
     if device.type == "cuda":
