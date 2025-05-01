@@ -7,7 +7,9 @@ import time
 import click
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.signal
+def smooth_predictions(predictions, window_size=5):
+    return np.convolve(predictions, 
+np.ones(window_size)/window_size, mode='valid')import scipy.signal
 import skimage.draw
 import torch
 import torchvision
