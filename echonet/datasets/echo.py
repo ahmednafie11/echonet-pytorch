@@ -1,6 +1,7 @@
 import collections
 import glob
 import os
+root = os.path.expanduser("~/cardio-echo/data")  # Replace a4c-video-dir
 import re
 import numpy as np
 import pandas as pd
